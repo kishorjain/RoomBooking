@@ -2,4 +2,6 @@ asgiref==3.8.1
 Django==5.2
 django-allauth==65.19.1
 django-bootstrap5==25.1
+gunicorn==26.2.0
 sqlparse==0.5.3
+whitenoise==6.12.0

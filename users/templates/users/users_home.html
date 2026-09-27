@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <!-- Left Column: Display Current Data -->
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm p-4">
+            <h2 class="text-secondary">Profile: {{ username }}</h2>
+            {% if user_role %}
+                <p><strong>Role:</strong> {{ user_role }}</p>
+            {% endif %}
+            
+            {% if message %}
+                <div class="alert alert-success mt-2">{{ message }}</div>
+            {% endif %}
+            
+            {% if search_query %}
+                <p class="text-muted mt-3">Filtered by search keyword: <code>{{ search_query }}</code></p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Right Column: The Edit Form (POST Action) -->
+    <div class="col-md-6">
+        <div class="card shadow-sm p-4">
+            <h4>Update Information</h4>
+            <hr>
+            <form method="POST" action="">
+                {% csrf_token %} <!-- Mandatory security token -->
+                
+                <div class="mb-3">
+                    <label class="form-label">New Username</label>
+                    <input type="text" name="input_username" class="form-control" placeholder="Enter name...">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Assign Role</label>
+                    <input type="text" name="input_role" class="form-control" placeholder="e.g., Manager, Employee...">
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100">Save Profile</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

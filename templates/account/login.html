@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Padding-top pushes the card down below your absolute header banner -->
+<div class="container pt-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow p-4 border-0 rounded-4 bg-white">
+                <div class="text-center mb-4">
+                    <h3 class="font-weight-bold text-dark">Sign In</h3>
+                    <p class="text-muted">Access your Palatin Room Booking account</p>
+                </div>
+
+                <!-- The secure form target for django-allauth -->
+                <form class="login" method="POST" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Please fix the errors below:</strong>
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Automatically loops and outputs the authentication fields -->
+                    <div class="mb-3">
+                        {{ form.as_p }}
+                    </div>
+
+                    <button class="btn btn-primary w-100 py-2 btn-lg mb-3" type="submit">Sign In</button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <p class="text-muted mb-0">Don't have an account yet?</p>
+                    <a href="{% url 'account_signup' %}" class="text-warning font-weight-bold">Create an Account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container pt-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow p-4 border-0 rounded-4 bg-white">
+                
+                <h2 class="font-weight-bold text-dark mb-2">📬 Email Addresses</h2>
+                <p class="text-muted mb-4">Manage the email communications linked to your account.</p>
+                <hr>
+
+                <!-- Re-rendering allauth forms with cleaner button styling layouts -->
+                <form action="{% url 'account_email' %}" class="email_list" method="post">
+                    {% csrf_token %}
+                    
+                    <div class="list-group mb-4">
+                        {{ form.as_p }}
+                    </div>
+
+                    <div class="d-flex gap-2 mb-4">
+                        <button class="btn btn-primary" name="action_primary" type="submit">Make Primary</button>
+                        <button class="btn btn-outline-secondary" name="action_send" type="submit">Re-send Verification</button>
+                        <button class="btn btn-danger" name="action_remove" type="submit">Remove</button>
+                    </div>
+                </form>
+
+                <h4 class="font-weight-bold text-dark mt-4 mb-3">Add Email Address</h4>
+                <form method="post" action="{% url 'account_email' %}" class="add_email">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        {{ add_email_form.as_p }}
+                    </div>
+                    
+                    <button class="btn btn-success px-4" name="action_add" type="submit">Add Email</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
